@@ -16,7 +16,7 @@ def button():
         txt["text"] = "Você não digitou um Numero valido"
 
 bt1 = Button(window, width=20, text="Soma", command=button)
-bt1.place(x=100,y=200)
+bt1.place(x=100,y=190)
 
 en1 = Entry()
 en1.place(x=100,y=160)
