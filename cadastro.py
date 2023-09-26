@@ -3,29 +3,25 @@ from tkinter import *
 import mysql.connector
 
 
-def mostrar_opcao(opcao_selecionada):
-    label.config(text=f"Opção selecionada: {opcao_selecionada}")
-
-
 def enviar_dados():
     # Obtenha os valores das duas entradas
-    valor1 = nfe.get()
-    valor2 = key.get()
-    opcao_selecionada = opcao_var.get()
+    valor1 = winnfe.get()
+    valor2 = winkey.get()
+    teste3 = windows["text"]
 
     # Conecte-se ao banco de dados
     conexao = mysql.connector.connect(
         host="localhost",
         user="root",
         password="",
-        database="test"
+        database="cadastro"
     )
 
     cursor = conexao.cursor()
 
     # Execute a consulta SQL para inserir dados nas colunas do banco de dados
-    consulta = "INSERT INTO plan (nfe, chave, tipo) VALUES (%s, %s, %s)"
-    valores = (valor1, valor2, opcao_selecionada)
+    consulta = "INSERT INTO teste (nfe, chave, tipo) VALUES (%s, %s, %s)"
+    valores = (valor1, valor2, teste3)
 
     cursor.execute(consulta, valores)
 
@@ -37,8 +33,8 @@ def enviar_dados():
     conexao.close()
 
     # Limpe as entradas após o envio
-    nfe.delete(0, tk.END)
-    key.delete(0, tk.END)
+    winnfe.delete(0, tk.END)
+    winkey.delete(0, tk.END)
 
 
 janela = tk.Tk()
@@ -53,33 +49,54 @@ opcao_var = tk.StringVar()
 textcad = Label(janela, text="Cadastro de Keys/NFE", font=("Times", 15))
 textcad.place(x=300,y=0)
 
-txtnfe= Label(janela, text="NFE", font=("Times", 12))
-txtnfe.place(x=0,y=37)
+windowsnfe= Label(janela, text="NFE", font=("Times", 12))
+windowsnfe.place(x=0,y=37)
 
-txtkey= Label(janela, text="KEY", font=("Times", 12))
-txtkey.place(x=130,y=37)
+windowskey= Label(janela, text="KEY", font=("Times", 12))
+windowskey.place(x=130,y=37)
 
-txttipo= Label(janela, text="TIPO", font=("Times", 12))
-txttipo.place(x=310,y=37)
+windows= Label(janela, text="Windows", font=("Times", 12))
+windows.place(x=310,y=37)
 
 label= Label(janela, text="", font=("Times", 12))
 label.place(x=130,y=100)
 
-#Entrada de Dados
-key = Entry(janela)
-key.place(x=40,y=40, width=80)
+officenfe = Label(janela, text="KEY", font=("Times", 12))
+officenfe.place(x=0, y=70)
 
-nfe = Entry(janela)
-nfe.place(x=180,y=40, width=120)
+officekey= Label(janela, text="KEY", font=("Times", 12))
+officekey.place(x=130,y=70)
+
+office= Label(janela, text="Office", font=("Times", 12))
+office.place(x=310,y=70)
+
+computador= Label(janela, text="Computador", font=("Times", 12))
+computador.place(x=0,y=100)
+
+#Entrada de Dados
+winkey = Entry(janela)
+winkey.place(x=40,y=40, width=80)
+
+winnfe = Entry(janela)
+winnfe.place(x=180,y=40, width=120)
+
+offkey = Entry(janela)
+offkey.place(x=40,y=70, width=80)
+
+offkey = Entry(janela)
+offkey.place(x=180,y=70, width=120)
+
+offkey = Entry(janela)
+offkey.place(x=110,y=100, width=120)
 
 #Opções
-opcoes = ["Windows", "Office"]
-opcao_menu = OptionMenu(janela, opcao_var, *opcoes, command=mostrar_opcao)
-opcao_menu.place(x=299,y=39, width=50, height=20)
+#opcoes = ["Windows", "Office"]
+#opcao_menu = OptionMenu(janela, opcao_var, *opcoes)
+#opcao_menu.place(x=299,y=39, width=50, height=20)
 
 #Botões
 btnEnviar = Button(janela, text="Inserir", command=enviar_dados)
-btnEnviar.place(x=50,y=70, width=200)
+btnEnviar.place(x=50,y=200, width=200)
 
 
 janela.mainloop()
